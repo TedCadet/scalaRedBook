@@ -1,4 +1,4 @@
-name := "untitled1"
+name := "scalaRedBook"
 
 version := "0.1"
 
