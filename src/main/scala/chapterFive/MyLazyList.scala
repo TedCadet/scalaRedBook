@@ -6,28 +6,33 @@ enum MyLazyList[+A]:
   case Empty
   case Cons(h: () => A, t: () => MyLazyList[A])
 
-  def headOption: Option[A] = this match
-    case Empty => None
-    case Cons(h, _) => Some(h())
+  def headOption: Option[A] =
+    this match
+      case Empty => None
+      case Cons(h, _) => Some(h())
 
-  def toList: List[A] = this match
-    case Empty => Nil
-    case Cons(h, t) => List(h()).concat(t().toList.map(a => a))
+  def toList: List[A] =
+    this match
+      case Empty => Nil
+      case Cons(h, t) => List(h()).concat(t().toList.map(a => a))
 
-  def take(n: Int): MyLazyList[A] = this match
-    case Empty => Empty
-    case Cons(_, _) if n <= 0 => Empty
-    case Cons(h, t) => MyLazyList.cons(h(), t().take(n-1))
+  def take(n: Int): MyLazyList[A] =
+    this match
+      case Empty => Empty
+      case Cons(_, _) if n <= 0 => Empty
+      case Cons(h, t) => MyLazyList.cons(h(), t().take(n-1))
 
-  def drop(n: Int): MyLazyList[A] = this match
-    case Empty => Empty
-    case Cons(_, _) if n <= 0 => Empty
-    case Cons(_, t)  => t().drop(n-1)
+  def drop(n: Int): MyLazyList[A] =
+    this match
+      case Empty => Empty
+      case Cons(_, _) if n <= 0 => Empty
+      case Cons(_, t)  => t().drop(n-1)
 
   //TODO: A etudier
-  def foldRight[B](acc: => B)(f: (A, => B) => B): B = this match
-    case Cons(h,t) => f(h(), t().foldRight(acc)(f))
-    case _ => acc
+  def foldRight[B](acc: => B)(f: (A, => B) => B): B =
+    this match
+      case Cons(h,t) => f(h(), t().foldRight(acc)(f))
+      case _ => acc
 
   //TODO: A etudier
   def exists(p: A => Boolean): Boolean =
@@ -62,7 +67,9 @@ enum MyLazyList[+A]:
   def find(p: A => Boolean): Option[A] =
     filter(p).headOption
 
-
+//  def zipAll[B](that: MyLazyList[B]): MyLazyList[(Option[A],Option[B])] =
+//    that match
+//      case
 
 object MyLazyList:
   def cons[A](h: => A, t: => MyLazyList[A]): MyLazyList[A] =
