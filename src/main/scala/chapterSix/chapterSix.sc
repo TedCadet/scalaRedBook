@@ -1,4 +1,5 @@
-import chapterSix.{RNG, SimpleRNG}
+import chapterSix.SimpleRNG.nonNegativeLessThan
+import chapterSix.{RNG, Rand, SimpleRNG}
 
 val rng = SimpleRNG(42)
 
@@ -13,3 +14,5 @@ println(SimpleRNG.double(rng))
 println(SimpleRNG.ints(10)(rng))
 SimpleRNG.unit(1)
 SimpleRNG.nonNegativeEven(rng)
+
+SimpleRNG.rollDie(rng2)
