@@ -1,5 +1,11 @@
 package chapterSix
 
 // Should I use State Actions
+enum Input:
+  case Coin, Turn
+
 trait CoinMachine:
-  def takeInput(input: Input): CandyCoinMachine
+  def takeInput: MachineAction
+
+type MachineAction = Input => CoinMachine
+
