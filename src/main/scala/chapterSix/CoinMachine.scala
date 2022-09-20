@@ -8,4 +8,5 @@ trait CoinMachine:
   def takeInput: MachineAction
 
 type MachineAction = Input => CoinMachine
+type InputAction = CoinMachine => CoinMachine
 
