@@ -7,6 +7,7 @@ enum Input:
 trait CoinMachine:
   def takeInput: MachineAction
 
-type MachineAction = Input => CoinMachine
-type InputAction = CoinMachine => CoinMachine
+// I could change it: CoinMachine to State[CoinMachine, (Int, Int)]
+type MachineAction = Input => (CoinMachine, (Int, Int))
+type InputAction = CoinMachine => (CoinMachine, (Int, Int))
 
