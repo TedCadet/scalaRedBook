@@ -17,6 +17,12 @@ object State:
       _ <- set(f(s))
     yield ()
 
+  def modify2[S, A](a: A, f: A => S): State[S, Unit] =
+    for
+      s <- get
+      _ <- set(f(a))
+    yield ()
+
   def sequence[S, A](states: List[State[S, A]]): State[S, List[A]] =
     states.foldRight(unit[S, List[A]](Nil))((s, acc) => s.map2(acc)(_ :: _))
 
