@@ -37,7 +37,7 @@ object SimpleRNG:
 
   def flatMap[A, B](r: Rand[A])(f: A=> Rand[B]): Rand[B] =
     rng =>
-      val(a, _) = r(rng)
+      val (a, _) = r(rng)
       f(a)(rng)
 
   def both[A, B](ra: Rand[A], rb: Rand[B]): Rand[(A, B)] =
